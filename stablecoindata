@@ -1,0 +1,26 @@
+from web3 import Web3
+
+# Establish a connection to the Ethereum network
+web3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'))
+
+# ABI (Application Binary Interface) of the stablecoin smart contract
+contract_abi = [
+    # Include the ABI of the Stablecoin contract here
+]
+
+# Address of the deployed stablecoin smart contract
+contract_address = '0xYOUR_CONTRACT_ADDRESS'
+
+# Create a contract instance
+contract = web3.eth.contract(address=contract_address, abi=contract_abi)
+
+# Get the total supply of the stablecoin
+total_supply = contract.functions.totalSupply().call()
+print(f'Total Supply: {total_supply}')
+
+# Specify the account address for which you want to retrieve the balance
+account_address = '0xYOUR_ACCOUNT_ADDRESS'
+
+# Get the balance of the specified account
+balance = contract.functions.balanceOf(account_address).call()
+print(f'Balance of {account_address}: {balance}')
