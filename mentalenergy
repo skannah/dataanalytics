@@ -1,0 +1,13 @@
+time_spent = 2.5  # Time spent in hours
+electricity_used = 1500  # Electricity used in kilowatt-hours
+
+# Constants
+calories_per_kwh = 860  # Calories produced per kilowatt-hour
+
+# Calculate total energy consumed in kilocalories
+energy_consumed = electricity_used * calories_per_kwh
+
+# Calculate the rate of caloric energy used per hour
+rate_of_energy_used = energy_consumed / time_spent
+
+print(f"Rate of caloric energy used per hour: {rate_of_energy_used} kilocalories/hour")
