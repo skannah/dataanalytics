@@ -1,0 +1,35 @@
+from web3 import Web3
+
+# Connect to the Ethereum node
+web3 = Web3(Web3.HTTPProvider('https://mainnet.infura.io/v3/YOUR_INFURA_PROJECT_ID'))
+
+# Uniswap V2 Router contract address (Mainnet)
+UNISWAP_ROUTER_ADDRESS = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D"
+
+# ABI of the Uniswap V2 Router contract
+UNISWAP_ROUTER_ABI = [...]  # Replace with the actual ABI of the Uniswap V2 Router contract
+
+def get_pair_info(token0, token1):
+    # Get the contract instance
+    uniswap_router = web3.eth.contract(address=UNISWAP_ROUTER_ADDRESS, abi=UNISWAP_ROUTER_ABI)
+
+    # Get the token pair address
+    pair_address = uniswap_router.functions.pairFor(token0, token1).call()
+
+    # Get the reserves of the token pair
+    reserves = uniswap_router.functions.getReserves(pair_address).call()
+
+    # Extract relevant data
+    token0_reserve, token1_reserve, _ = reserves
+
+    return token0_reserve, token1_reserve
+
+if __name__ == "__main__":
+    # Example tokens on Uniswap (DAI and ETH)
+    DAI_ADDRESS = "0x6B175474E89094C44Da98b954EedeAC495271d0F"
+    ETH_ADDRESS = "0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE"
+
+    token0_reserve, token1_reserve = get_pair_info(DAI_ADDRESS, ETH_ADDRESS)
+
+    print(f"DAI Reserve: {token0_reserve}")
+    print(f"ETH Reserve: {token1_reserve}")
