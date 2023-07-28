@@ -1,0 +1,20 @@
+# Define a function to create sample data
+create_sample_data <- function() {
+  data <- data.frame(
+    x = c(1, 2, 3, 4, 5),
+    y = c(2, 4, 5, 4, 5)
+  )
+  return(data)
+}
+
+# Load required libraries
+library(stats)
+
+# Create sample data
+data <- create_sample_data()
+
+# Perform linear regression analysis
+model <- lm(y ~ x, data = data)
+
+# Print the summary of the regression model
+summary(model)
