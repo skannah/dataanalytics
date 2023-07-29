@@ -1,0 +1,19 @@
+# Define a list and a tuple
+my_list = [1, 2, 3, 4, 5]
+my_tuple = (6, 7, 8, 9, 10)
+
+# Attempt to modify the list and tuple
+my_list[0] = 100  # Modifying the list's first element
+# my_tuple[0] = 100  # Uncomment this line to see the error when modifying a tuple
+
+# Printing the modified list and tuple
+print("Modified List:", my_list)
+print("Modified Tuple:", my_tuple)
+
+
+//
+n the code above, we have a list my_list and a tuple my_tuple. The main difference between a list and a tuple is that lists are mutable, while tuples are immutable.
+
+In Python, you can modify the elements of a list after its creation, which means you can change, add, or remove elements. On the other hand, tuples are immutable, and once they are created, you cannot modify their elements. Attempting to modify a tuple will result in a TypeError.
+
+In the code, we demonstrate this difference by trying to modify the first element of both the list and the tuple. The modification of the list works without any issues, but if you uncomment the line that tries to modify the tuple's first element, you will get a TypeError.
