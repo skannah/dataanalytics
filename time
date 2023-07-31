@@ -1,0 +1,37 @@
+import datetime
+
+class VirtualServer:
+    def __init__(self):
+        self.start_time = None
+        self.end_time = None
+
+    def start_session(self):
+        self.start_time = datetime.datetime.now()
+
+    def end_session(self):
+        self.end_time = datetime.datetime.now()
+
+    def get_time_spent(self):
+        if self.start_time is None or self.end_time is None:
+            return None
+
+        time_spent = self.end_time - self.start_time
+        return time_spent
+
+# Example usage:
+if __name__ == "__main__":
+    virtual_server = VirtualServer()
+    virtual_server.start_session()
+
+    # Simulate some work being done in the virtual server...
+    # For this example, we'll just sleep for 5 seconds.
+    import time
+    time.sleep(5)
+
+    virtual_server.end_session()
+
+    time_spent = virtual_server.get_time_spent()
+    if time_spent:
+        print(f"Time spent in the virtual server: {time_spent}")
+    else:
+        print("Virtual server session has not started or ended.")
