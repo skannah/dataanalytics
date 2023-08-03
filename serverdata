@@ -1,0 +1,32 @@
+import pandas as pd
+
+# Assuming you have a CSV file with columns 'player', 'login_time', and 'logout_time'
+# Replace 'data_file.csv' with the actual file path
+data = pd.read_csv('data_file.csv')
+
+# Convert 'login_time' and 'logout_time' columns to pandas datetime objects
+data['login_time'] = pd.to_datetime(data['login_time'])
+data['logout_time'] = pd.to_datetime(data['logout_time'])
+
+# Calculate the total playtime for each player
+data['playtime'] = data['logout_time'] - data['login_time']
+
+# Calculate the average playtime
+average_playtime = data['playtime'].mean()
+
+# Calculate the total number of players
+total_players = data['player'].nunique()
+
+# Calculate the most active player
+most_active_player = data['player'].value_counts().idxmax()
+
+# Calculate the number of logins per day
+data['login_date'] = data['login_time'].dt.date
+logins_per_day = data['login_date'].value_counts()
+
+# Print the results
+print(f"Total players: {total_players}")
+print(f"Average playtime: {average_playtime}")
+print(f"Most active player: {most_active_player}")
+print("\nLogins per day:")
+print(logins_per_day)
