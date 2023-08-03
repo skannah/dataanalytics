@@ -1,0 +1,26 @@
+import pandas as pd
+
+# Assuming you have a database connection, replace 'your_connection_string' with the actual connection string
+# Example: "postgresql://username:password@localhost/db_name"
+# The 'query' should be the SQL query to extract the required data.
+# Replace it with your actual SQL query.
+def get_game_data(your_connection_string, query):
+    # Assuming your database supports SQLAlchemy, you can use it to connect and retrieve data
+    engine = create_engine(your_connection_string)
+
+    # Execute the SQL query and load the data into a pandas DataFrame
+    df = pd.read_sql_query(query, engine)
+
+    return df
+
+# Example query: Assuming you have a table named 'game_data' with columns 'user_id', 'money_spent', and 'circulation_pace'
+# You can adjust this query according to your actual table and column names.
+query = "SELECT user_id, money_spent, circulation_pace FROM game_data;"
+
+# Assuming you have your database connection string and query ready, call the function to get the data
+connection_string = "your_connection_string_here"
+game_data_df = get_game_data(connection_string, query)
+
+# Now, you have the game data in a pandas DataFrame and can perform any analysis or manipulation you need.
+# For example, you can print the first few rows of the DataFrame to check the data:
+print(game_data_df.head())
