@@ -1,0 +1,60 @@
+import sqlite3
+
+# Replace 'your_database.db' with the actual path to your database file
+DATABASE_FILE = 'your_database.db'
+
+def connect_to_database():
+    """Connects to the SQLite database and returns the connection and cursor objects."""
+    conn = sqlite3.connect(DATABASE_FILE)
+    cursor = conn.cursor()
+    return conn, cursor
+
+def close_database_connection(conn):
+    """Closes the database connection."""
+    conn.close()
+
+def get_check_ins():
+    """Retrieve data on check-ins from the database."""
+    conn, cursor = connect_to_database()
+    cursor.execute("SELECT check_in_date, guest_name, property_name FROM check_ins")
+    check_ins_data = cursor.fetchall()
+    close_database_connection(conn)
+    return check_ins_data
+
+def get_spending_per_stay():
+    """Retrieve data on spending per stay from the database."""
+    conn, cursor = connect_to_database()
+    cursor.execute("SELECT guest_name, SUM(amount_spent) FROM transactions GROUP BY guest_name")
+    spending_per_stay_data = cursor.fetchall()
+    close_database_connection(conn)
+    return spending_per_stay_data
+
+def get_city_data():
+    """Retrieve city data for the hotel properties from the database."""
+    conn, cursor = connect_to_database()
+    cursor.execute("SELECT property_name, city FROM hotel_properties")
+    city_data = cursor.fetchall()
+    close_database_connection(conn)
+    return city_data
+
+def get_currency_used():
+    """Retrieve data on currency used for transactions from the database."""
+    conn, cursor = connect_to_database()
+    cursor.execute("SELECT currency FROM transactions")
+    currency_data = cursor.fetchall()
+    close_database_connection(conn)
+    return currency_data
+
+# Example usage:
+if __name__ == "__main__":
+    check_ins = get_check_ins()
+    print("Check-ins data:", check_ins)
+
+    spending_per_stay = get_spending_per_stay()
+    print("Spending per stay data:", spending_per_stay)
+
+    city_data = get_city_data()
+    print("City data:", city_data)
+
+    currency_data = get_currency_used()
+    print("Currency data:", currency_data)
