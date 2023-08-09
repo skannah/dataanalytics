@@ -1,0 +1,16 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load your preprocessed data into a Pandas DataFrame
+data = pd.read_csv('building_movement_data.csv')
+
+# Assuming 'section' is a column in your DataFrame that specifies building sections
+section_time = data.groupby('section')['time_spent'].sum()
+
+# Create a bar chart to visualize time spent in each section
+plt.bar(section_time.index, section_time.values)
+plt.xlabel('Building Section')
+plt.ylabel('Time Spent (minutes)')
+plt.title('Time Spent in Each Building Section')
+plt.xticks(rotation=45)
+plt.show()
